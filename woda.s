@@ -22,7 +22,7 @@ ldi R16, 0xFF ; pd0-7 podciagamy do napiecia '1'
 out PORTD, R16
 
 ; SETUP diody od pompy na pb0-1, diod stanowych na pb2-3
-ldi R16, 0b00000011 ; oba wyjsciowe
+ldi R16, 0b00001111 ; oba wyjsciowe
 out DDRB, R16
 ldi R16, 0b00000000 ; nie swieci na razie
 out PORTB, R16
@@ -52,7 +52,6 @@ brlo b1s1 ;
 rcall czy_baniak_pusty
 cpi R20, 1
 brlo b0s0
-
 
 rjmp b1s0impl
 
@@ -127,8 +126,14 @@ czy_studnia_pelna:
 cbi PORTD, 2 ; puszczamy 0 na pd2 (ten od studni)
 
 ldi R20, 0 ; jesli oba guziki wcisniete - return true
+nop ; raczej niepotrzebne
+nop ; raczej niepotrzebne
+nop ; raczej niepotrzebne
+nop ; raczej niepotrzebne
+nop ; raczej niepotrzebne
 sbic PIND, 0 ; jesli pd0==0, guzik wcisniety, nic nie rob 
 ldi R20, 1 ; wpp guzik zwolniony, return false
+nop ; raczej niepotrzebne
 sbic PIND, 1 ; jesli pd1==0, guzik wcisniety, nic nie rob
 ldi R20, 1 ; wpp guzik zwolniony, return false
 
@@ -141,8 +146,14 @@ czy_studnia_pusta:
 cbi PORTD, 2 ; puszczamy 0 na pd2 (ten od studni)
 
 ldi R20, 0 ; jesli oba guziki zwolnione - return true
+nop ; raczej niepotrzebne
+nop ; raczej niepotrzebne
+nop ; raczej niepotrzebne
+nop ; raczej niepotrzebne
+nop ; raczej niepotrzebne
 sbis PIND, 0 ; jesli pd0==1, guzik zwolniony, nic nie rob
 ldi R20, 1 ; wpp guzik wcisniety, return false
+nop ; raczej niepotrzebne
 sbis PIND, 1 ; jesli pd1==1, guzik zwolniony, nic nie rob
 ldi R20, 1 ; wpp guzik wcisniety, return false
 
@@ -155,8 +166,10 @@ czy_baniak_pelny:
 cbi PORTD, 3 ; puszczamy 0 na pd3 (od baniaka)
 
 ldi R20, 0 ; jesli oba wcisniete, return true
+nop ; raczej niepotrzebne
 sbic PIND, 4 ; jesli pd4==0, guzik wcisniety, nic nie rob
 ldi R20, 1 ; wpp guzik zwolniony, return false
+nop ; raczej niepotrzebne
 sbic PIND, 5 ; jesli pd5==0, guzik wcisniety, nic nie rob
 ldi R20, 1 ; wpp guzik zwolniony, return false
 
@@ -170,8 +183,10 @@ czy_baniak_pusty:
 cbi PORTD, 3 ; puszczamy 0 na pd3 (ten od baniaka)
 
 ldi R20, 0 ; jesli oba puszczone, return true
+nop ; raczej niepotrzebne
 sbis PIND, 4 ; jesli pd4==1, puszczony guzik, nic nie rob
 ldi R20, 1 ; wpp, guzik wcisniety, pd4==0, zwroc false
+nop ; raczej niepotrzebne
 sbis PIND, 5 ; jesli pd5==1, puszczony guzik, nic nie rob
 ldi R20, 1 ; wpp, guzik wcisniety, pd5==0, zwroc false
 
